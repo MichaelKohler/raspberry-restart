@@ -1,0 +1,7 @@
+{
+  "host": "",
+  "onURL": "",
+  "offURL": "",
+  "waitAfterOff": 5000,
+  "intervalInMinutes": 1
+}
