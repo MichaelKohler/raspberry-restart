@@ -5,6 +5,7 @@ const axios = require('axios');
 const Monitor = require('ping-monitor');
 
 let alreadyFailedOnce = false;
+let restartingPi = false;
 let config;
 
 try {
@@ -24,6 +25,10 @@ piMonitor.on('down', handlePiDown);
 piMonitor.on('error', handlePiDown);
 
 function handlePiDown(response) {
+  if (restartingPi) {
+    return;
+  }
+
   debug('Pi is down', alreadyFailedOnce);
 
   if (alreadyFailedOnce) {
@@ -38,6 +43,7 @@ function handlePiDown(response) {
 
 function restartPi() {
   debug('Turning off Pi');
+  restartingPi = true;
 
   axios.get(config.offURL);
 
@@ -46,4 +52,9 @@ function restartPi() {
 
     axios.get(config.onURL);
   }, config.waitAfterOff);
+
+  setTimeout(() => {
+    debug('Finished waiting.. Raspberry should be back up!');
+    restartingPi = false;
+  }, config.waitAfterReboot);
 }

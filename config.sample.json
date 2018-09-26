@@ -3,5 +3,6 @@
   "onURL": "",
   "offURL": "",
   "waitAfterOff": 5000,
+  "waitAfterReboot": 120000,
   "intervalInMinutes": 1
 }
