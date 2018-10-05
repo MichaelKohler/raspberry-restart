@@ -1,7 +1,9 @@
 {
   "host": "",
   "onURL": "",
+  "onMethod": "get",
   "offURL": "",
+  "offMethod": "get",
   "waitAfterOff": 5000,
   "waitAfterReboot": 120000,
   "intervalInMinutes": 1

@@ -45,12 +45,18 @@ function restartPi() {
   debug('Turning off Pi');
   restartingPi = true;
 
-  axios.get(config.offURL);
+  axios({
+    method: config.offMethod,
+    url: config.offURL,
+  });
 
   setTimeout(() => {
     debug ('Turning on Pi');
 
-    axios.get(config.onURL);
+    axios({
+      method: config.onMethod,
+      url: config.onURL,
+    });
   }, config.waitAfterOff);
 
   setTimeout(() => {
